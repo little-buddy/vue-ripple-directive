@@ -3,7 +3,7 @@ var Ripple = {
 
         // Default values.
         var props = {
-            event: 'mousedown',
+            event: 'touchstart',
             transition: 600
         };
 
@@ -27,8 +27,8 @@ var Ripple = {
                 top         = rect.top,
                 width       = target.offsetWidth,
                 height      = target.offsetHeight,
-                dx          = event.clientX - left,
-                dy          = event.clientY - top,
+                dx          = event.touches[0].clientX - left,
+                dy          = event.touches[0].clientY - top,
                 maxX        = Math.max(dx, width - dx),
                 maxY        = Math.max(dy, height - dy),
                 style       = window.getComputedStyle(target),
@@ -104,7 +104,7 @@ var Ripple = {
                     rippleContainer.parentNode.removeChild(rippleContainer);
                 }, 850);
 
-                el.removeEventListener('mouseup', clearRipple, false);
+                // el.removeEventListener('mouseup', clearRipple, false);
 
                 // After removing event set position to target to it's original one
                 // Timeout it's needed to avoid jerky effect of ripple jumping out parent target
@@ -128,11 +128,11 @@ var Ripple = {
                 }, props.transition + 250)
             }
 
-            if(event.type === 'mousedown') {
-                el.addEventListener('mouseup', clearRipple, false);
-            } else {
+            // if(event.type === 'mousedown') {
+            //     el.addEventListener('mouseup', clearRipple, false);
+            // } else {
                 clearRipple();
-            }
+            // }
         }
     }
 };
